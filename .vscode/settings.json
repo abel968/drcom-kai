@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "socket.h": "c",
+        "system_error": "c"
+    }
+}
