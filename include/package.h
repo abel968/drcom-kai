@@ -7,11 +7,11 @@
 
 
 
-unsigned char* Pack_str1(size_t* plen, int ran);
+unsigned char* Pack_str1(int* plen, int ran);
 
-unsigned char* Pack_str2(size_t* plen, unsigned char* salt, char* host_ip, char* hostname, char* dns, char* username, char* password, unsigned char* mac);
+unsigned char* Pack_str2(int* plen, unsigned char* salt, char* host_ip, char* hostname, char* dns, char* username, char* password, unsigned char* mac);
 
-unsigned char* Pack_str3(size_t* plen, unsigned char* salt, unsigned char* tail, unsigned char* password);
+unsigned char* Pack_str3(int* plen, unsigned char* salt, unsigned char* tail, unsigned char* password);
 
-unsigned char* Pack_str4(size_t* plen, char* host_ip, unsigned int* pnum, unsigned int* pran, unsigned char* tail, unsigned int type, unsigned int first);
+unsigned char* Pack_str4(int* plen, char* host_ip, unsigned int num, unsigned int* pran, unsigned char* tail, unsigned int type, unsigned int first);
 #endif

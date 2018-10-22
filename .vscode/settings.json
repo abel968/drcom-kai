@@ -2,6 +2,8 @@
     "files.associations": {
         "iostream": "cpp",
         "socket.h": "c",
-        "system_error": "c"
+        "system_error": "c",
+        "utils.h": "c",
+        "exception": "c"
     }
 }

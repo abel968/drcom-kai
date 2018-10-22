@@ -67,3 +67,22 @@ void checksum(unsigned char* ret, unsigned char* str, size_t len)
   *ret++ = (unsigned char)((t >> 16) & 0xff);
   *ret++ = (unsigned char)((t >> 24) & 0xff);
 }
+
+int StartWith(unsigned char* src, unsigned char* pattern, size_t len)
+{
+  for (size_t i = 0; i < len; i++)
+  {
+    if (src[i] != pattern[i])
+      return 0;
+  }
+  return 1;
+}
+
+void HexLog(unsigned char* src, int len)
+{
+  for (int i = 0; i < len; i++)
+  {
+    printf("%02x",src[i]);
+  }
+  printf("\n");
+}

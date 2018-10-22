@@ -138,7 +138,7 @@ unsigned char str4[] =
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-unsigned char* Pack_str1(size_t* plen, int ran)
+unsigned char* Pack_str1(int* plen, int ran)
 {
   str1[2] = (unsigned char)(ran & 0xff);
   str1[3] = (unsigned char)((ran >> 2) & 0xff);
@@ -146,7 +146,7 @@ unsigned char* Pack_str1(size_t* plen, int ran)
   return str1;
 }
 
-unsigned char* Pack_str2(size_t* plen, unsigned char* salt, char* host_ip, char* hostname, char* dns, char* username, char* password, unsigned char* mac)
+unsigned char* Pack_str2(int* plen, unsigned char* salt, char* host_ip, char* hostname, char* dns, char* username, char* password, unsigned char* mac)
 {
   unsigned char* p_str2 = str2;
   
@@ -218,7 +218,7 @@ unsigned char* Pack_str2(size_t* plen, unsigned char* salt, char* host_ip, char*
 
   ipstr2byte(dns, ip_tmp);
   memcpy(p_str2, ip_tmp, 4);
-  p_str2 += 40;
+  p_str2 += 48;
   p_str2 += 55;
   p_str2 += 40;
   p_str2 += 24;
@@ -258,7 +258,7 @@ unsigned char* Pack_str2(size_t* plen, unsigned char* salt, char* host_ip, char*
   return str2;
 }
 
-unsigned char* Pack_str3(size_t* plen, unsigned char* salt, unsigned char* tail, unsigned char* password)
+unsigned char* Pack_str3(int* plen, unsigned char* salt, unsigned char* tail, unsigned char* password)
 {
   unsigned char tmp1[] = {
     0x03, 0x01,
@@ -266,7 +266,7 @@ unsigned char* Pack_str3(size_t* plen, unsigned char* salt, unsigned char* tail,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 // password
   };
-  size_t pwd_len = strlen(password);
+  size_t pwd_len = strlen((char*)password);
   memcpy(tmp1 + 2, salt, 4);
   memcpy(tmp1 + 6, password, pwd_len);
   size_t tmp1_len = 6 + pwd_len;
@@ -282,11 +282,11 @@ unsigned char* Pack_str3(size_t* plen, unsigned char* salt, unsigned char* tail,
   return str3;
 }
 
-unsigned char* Pack_str4(size_t* plen, char* host_ip, unsigned int* pnum, unsigned int* pran, unsigned char* tail, unsigned int type, unsigned int first)
+unsigned char* Pack_str4(int* plen, char* host_ip, unsigned int num, unsigned int* pran, unsigned char* tail, unsigned int type, unsigned int first)
 {
   unsigned char* p_str = str4;
   p_str++;
-  *p_str = (unsigned char)*pnum;
+  *p_str = (unsigned char)num;
   p_str += 4;
   *p_str++ = (unsigned char)type;
   if (first)
